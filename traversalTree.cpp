@@ -108,6 +108,17 @@ int height(Node* root) {
     return count;
 }
 
+int count(Node* root) {
+    if (root == NULL) {
+        return 0;
+    }
+
+    int leftCount = count(root->left);
+    int rightCount = count(root->right);
+
+    return leftCount + rightCount + 1;
+}
+
 int main() {
     vector<int> nodes = {1,2,4,-1,-1,5,-1,-1,3,-1,6,-1,-1};
     Node* root = buildTrees(nodes);
@@ -116,6 +127,6 @@ int main() {
 
     // levelorder(root);
 
-    cout << height(root);
+    cout << count(root);
 
 }
