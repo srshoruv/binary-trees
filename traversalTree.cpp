@@ -96,12 +96,26 @@ void levelorder(Node* root) {
     }
 }
 
+int height(Node* root) {
+    if (root == NULL) {
+        return 0;
+    }
+
+    int left = height(root->left);
+    int right = height(root->right);
+    int count = max(left,right) + 1;
+    
+    return count;
+}
+
 int main() {
     vector<int> nodes = {1,2,4,-1,-1,5,-1,-1,3,-1,6,-1,-1};
     Node* root = buildTrees(nodes);
     
     // postorder(root);
 
-    levelorder(root);
+    // levelorder(root);
+
+    cout << height(root);
 
 }
