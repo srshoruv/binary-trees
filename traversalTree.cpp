@@ -130,6 +130,18 @@ int sum(Node* root) {
     return leftSum + rightSum + root->data;
 }
 
+int digm(Node* root) {
+    if (root==NULL) {
+        return 0;
+    }
+
+    int currDigm = height(root->left) + height(root->right) + 1;
+    int leftDg = digm(root->left);
+    int rightDg = digm(root->right);
+
+    return max(currDigm, max(leftDg, rightDg));
+}
+
 int main() {
     vector<int> nodes = {1,2,4,-1,-1,5,-1,-1,3,-1,6,-1,-1};
     Node* root = buildTrees(nodes);
@@ -138,6 +150,6 @@ int main() {
 
     // levelorder(root);
 
-    cout << sum(root);
+    cout << digm(root);
 
 }
