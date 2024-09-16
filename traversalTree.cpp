@@ -142,6 +142,22 @@ int digm(Node* root) {
     return max(currDigm, max(leftDg, rightDg));
 }
 
+pair<int,int> digm2(Node* root) {
+    if (root==NULL) {
+        return make_pair(0,0);
+    }
+
+    pair<int,int> leftInfo = digm2(root->left);
+    pair<int,int> rightInfo = digm2(root->right);
+
+    int currDig = leftInfo.second + rightInfo.second + 1;
+    int finalDig = max(currDig, max(leftInfo.first, rightInfo.first));
+    int finalHt = max(leftInfo.second, rightInfo.second) + 1;
+
+    return make_pair(finalDig, finalHt);
+
+}
+
 int main() {
     vector<int> nodes = {1,2,4,-1,-1,5,-1,-1,3,-1,6,-1,-1};
     Node* root = buildTrees(nodes);
@@ -150,6 +166,6 @@ int main() {
 
     // levelorder(root);
 
-    cout << digm(root);
+    cout << digm2(root).first;
 
 }
